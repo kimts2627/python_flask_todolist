@@ -1,16 +1,39 @@
-<h1>{{ todo.label }}</h1>
-<p>{{todo.create_data}}</p>
-<div>{{ todo.content }}</div>
-<a
-    href="#"
-    data-uri="{{ url_for('todo.todo_delete', todo_id=todo.id) }}"
->
-    삭제
-</a>
-<div>
-    <a
-        href="{{ url_for('todo.todo_modify', todo_id = todo.id) }}"
-    >
-        수정
-    </a>
+{% extends 'base.html' %}
+{% block content %}
+<div class='page'>
+    <a href='javascript:history.back()' class='back'>이전</a>
+    <h1>{{ todo.label }}</h1>
+    <p>{{todo.create_data}}</p>
+    <h2>{{ todo.content }}</h2>
+    <section>
+        <a
+            href="{{ url_for('todo.todo_modify', todo_id=todo.id) }}"
+        >
+            수정
+        </a>
+        <a
+            href="{{ url_for('todo.todo_delete', todo_id=todo.id) }}"
+            data-uri="{{ url_for('todo.todo_delete', todo_id=todo.id) }}"
+            class="delete"
+        >
+            삭제
+        </a>
+    <section>
 </div>
+<form action="{{ url_for('reply.create', todo_id = todo.id) }}" method="post">
+    <textarea name="content" id="content" rows="15"></textarea>
+    <input type="submit" value="댓글등록">
+</form>
+{% endblock %}
+
+{% block script %}
+<!-- <script type='text/javascript'>
+$(document).ready(() => {
+    $(".delete").on('click', () => {
+        if(confirm("for real?")) {
+            location.href = $(this).data('uri');
+        }
+    });
+});
+</script> -->
+{% endblock %}

@@ -1,13 +1,16 @@
-<div>
-    <h5 class="my-3 border-bottom pb-2">Todo등록</h5>
-    <form method="post">
+{% extends 'base.html' %}
+{% block content %}
+    <div>
+        <h5 class="my-3 border-bottom pb-2">Todo등록</h5>
+        <form method="POST">
+            {{ form.csrf_token }}
+            {{ form.label.label }}
+            {{ form.label() }}
 
-        {{ form.label.label }}
-        {{ form.label() }}
+            {{ form.content.label }}
+            {{ form.content() }}
 
-        {{ form.content.label }}
-        {{ form.content() }}
-
-        <button type="submit">저장하기</button>
-    </form>
-</div>
+            <button type="submit">저장하기</button>
+        </form>
+    </div>
+{% endblock %}

@@ -19,8 +19,9 @@ def create_app(): # 애플리케이션 팩토리 : 순환참조 방지
     from app.models import todo
 
     # 블루프린트
-    from app.views import main_view, todo_view
+    from app.views import main_view, todo_view, reply_view
     app.register_blueprint(main_view.bp)
     app.register_blueprint(todo_view.bp)
+    app.register_blueprint(reply_view.bp)
 
     return app

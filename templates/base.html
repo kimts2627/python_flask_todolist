@@ -6,10 +6,14 @@
     name="viewport"
     content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <title>Taesu's TodoList!</title>
 </head>
 <body>
     {% block content %}
+    {% endblock %}
+    <script src="{{ url_for('static', filename='jquery-3.4.1.min.js') }}"></script>
+    {% block script %}
     {% endblock %}
 </body>
 </html>
