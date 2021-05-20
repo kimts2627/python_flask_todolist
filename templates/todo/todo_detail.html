@@ -3,7 +3,7 @@
 <div class='page'>
     <a href='javascript:history.back()' class='back'>이전</a>
     <h1>{{ todo.label }}</h1>
-    <p>{{todo.create_data}}</p>
+    <p>{{ todo.create_data }}</p>
     <h2>{{ todo.content }}</h2>
     <section>
         <a
@@ -18,12 +18,27 @@
         >
             삭제
         </a>
-    <section>
+    </section>
+    <article class='reply'>
+        <form action="{{ url_for('reply.create', todo_id = todo.id) }}" method="post">
+            <textarea name="content" id="content" rows="15"></textarea>
+            <input type="submit" value="댓글등록">
+        </form>
+        <h5>{{ todo.reply_set|length }}개의 댓글이 있습니다.</h5>
+        <ul>
+            {% for reply in todo.reply_set %}
+                <li>
+                    {{ reply.content }}
+                    <div>
+                        <p>{{ reply.create_data }}</p>
+                        <button>x</button>
+                    </div>
+                </li>
+                <hr>
+            {% endfor %}
+        </ul>
+    </article>
 </div>
-<form action="{{ url_for('reply.create', todo_id = todo.id) }}" method="post">
-    <textarea name="content" id="content" rows="15"></textarea>
-    <input type="submit" value="댓글등록">
-</form>
 {% endblock %}
 
 {% block script %}
