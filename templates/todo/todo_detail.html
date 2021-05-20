@@ -1,0 +1,16 @@
+<h1>{{ todo.label }}</h1>
+<p>{{todo.create_data}}</p>
+<div>{{ todo.content }}</div>
+<a
+    href="#"
+    data-uri="{{ url_for('todo.todo_delete', todo_id=todo.id) }}"
+>
+    삭제
+</a>
+<div>
+    <a
+        href="{{ url_for('todo.todo_modify', todo_id = todo.id) }}"
+    >
+        수정
+    </a>
+</div>

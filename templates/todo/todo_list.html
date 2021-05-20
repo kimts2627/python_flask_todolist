@@ -1,0 +1,19 @@
+
+<div>
+    {% if todo_list %}
+        <ul>
+            {% for todo in todo_list %}
+            <li>
+            <a href="{{ url_for('todo.todo_detail', todo_id=todo.id) }}"
+                >{{ todo.label }}</a
+            >
+            </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>todo가 없습니다.</p>
+    {% endif %}
+    <div>
+        <a href="{{ url_for('todo.todo_create') }}">todo 등록</a>
+    </div>
+</div>
