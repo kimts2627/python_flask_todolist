@@ -11,7 +11,8 @@ bp = Blueprint('reply', __name__, url_prefix='/reply')
 def reply_create(todo_id):
     todo = TodoList.query.get_or_404(todo_id)
     content = request.form['content']
-    reply = Reply(content = content, create_data = datetime.now())
+    author = request.form['author']
+    reply = Reply(content = content, author = author, create_data = datetime.now())
     todo.reply_set.append(reply)
     db.session.commit()
     return redirect(url_for('todo.todo_detail', todo_id = todo_id))

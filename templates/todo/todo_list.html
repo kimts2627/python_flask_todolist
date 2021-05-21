@@ -8,7 +8,8 @@
                 <a href="{{ url_for('todo.todo_detail', todo_id=todo.id) }}"
                     >{{ todo.label }}</a
                 >
-                <p>{{ todo.create_data }}</p>
+                <p>{{ todo.author }}</p>
+                <p class='date'>{{ todo.create_data }}</p>
                 </li>
                 {% endfor %}
             </ul>

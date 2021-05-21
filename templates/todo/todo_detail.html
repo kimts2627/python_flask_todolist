@@ -3,25 +3,29 @@
 <div class='page'>
     <a href="{{ url_for('todo.todolists')}}" class='back'>이전</a>
     <h1>{{ todo.label }}</h1>
+    <h3>{{ todo.author }}</h3>
     <p>{{ todo.create_data }}</p>
     <h2>{{ todo.content }}</h2>
     <section>
-        <a
-            href="{{ url_for('todo.todo_modify', todo_id=todo.id) }}"
-        >
-            수정
-        </a>
-        <a
-            href="{{ url_for('todo.todo_delete', todo_id=todo.id) }}"
-            data-uri="{{ url_for('todo.todo_delete', todo_id=todo.id) }}"
-            class="delete"
-        >
-            삭제
-        </a>
+        <form action="{{ url_for('todo.todo_modify', todo_id=todo.id) }}">
+            <input type="hidden" name="_method" value="patch">
+            <input
+                type="submit"
+                value='수정'
+            >
+        </form>
+        <form action="{{ url_for('todo.todo_delete', todo_id=todo.id) }}">
+            <input type="hidden" name="_METHOD" value="delete">
+            <input
+                type="submit"
+                value='삭제'
+            >
+        </form>
     </section>
     <article class='reply'>
         <form action="{{ url_for('reply.reply_create', todo_id = todo.id) }}" method="post">
             <textarea name="content" id="content" rows="15"></textarea>
+            <input type='text' name='author' id='author' placeholder='이름'/>
             <input type="submit" value="댓글등록">
         </form>
         <h5>{{ todo.reply_set|length }}개의 댓글이 있습니다.</h5>
@@ -30,9 +34,24 @@
                 <li>
                     {{ reply.content }}
                     <div>
-                        <p>{{ reply.create_data }}</p>
-                        <a href="{{ url_for('reply.reply_modify', reply_id = reply.id) }}">edit</a>
-                        <a href="{{ url_for('reply.reply_delete', reply_id = reply.id) }}">x</a>
+                        <p>{{ reply.author }}</p>
+                        <p class='date'>{{ reply.create_data }}</p>
+                        <section>
+                            <form action="{{ url_for('reply.reply_modify', reply_id = reply.id) }}">
+                                <input type="hidden" name="_method" value="patch">
+                                <input
+                                    type="submit"
+                                    value='수정'
+                                >
+                            </form>
+                            <form action="{{ url_for('reply.reply_delete', reply_id = reply.id) }}">
+                                <input type="hidden" name="_METHOD" value="delete">
+                                <input
+                                    type="submit"
+                                    value='삭제'
+                                >
+                            </form>
+                        </section>
                     </div>
                 </li>
                 <hr>

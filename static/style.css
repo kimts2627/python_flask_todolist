@@ -67,6 +67,15 @@
   margin-bottom: 10px;
 }
 
+.lists li a {
+  flex: 1;
+  text-align: center;
+}
+
+.lists li p {
+  margin-right: 4px;
+}
+
 .reply {
   width: 90%;
   height: 550px;
@@ -94,6 +103,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: relative;
 }
 
 .reply li div {
@@ -101,8 +111,17 @@
   align-items: center;
 }
 
-.reply li div a {
-  height: 25px;
-  margin-left: 15px;
+.reply li div p {
+  margin-right: 5px;
+}
+
+.date {
+  font-size: 10px;
+}
+
+.reply li section {
+  position: absolute;
+  top: -10px;
+  right: 5px;
 }
 

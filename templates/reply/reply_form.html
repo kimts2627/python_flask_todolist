@@ -1,12 +1,16 @@
 {% extends 'base.html' %}
 {% block content %}
     <div class="container my-3">
-        <form method="POST">
+        <form method="post">
             {% include "form_errors.html" %}
+            <input type="hidden" name="_method" value="POST"/>
             <div>
                 {{ form.csrf_token }}
                 {{ form.content.label }}
                 {{ form.content() }}
+
+                {{ form.author.label }}
+                {{ form.author() }}
             </div>
             <button type="submit">저장하기</button>
         </form>

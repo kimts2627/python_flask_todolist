@@ -19,11 +19,11 @@ def todo_detail(todo_id):
     todo = TodoList.query.get_or_404(todo_id)
     return render_template('todo/todo_detail.html', todo = todo)
 
-@bp.route('/todolists/create', methods=('GET', 'POST'))
+@bp.route('/todolists/create', methods=['GET', 'POST'])
 def todo_create():
     form = TodoForm()
     if request.method == 'POST' and form.validate_on_submit():
-        todo = TodoList(label = form.label.data, content = form.content.data, create_data = datetime.now())
+        todo = TodoList(label = form.label.data, content = form.content.data, author = form.author.data, create_data = datetime.now())
         db.session.add(todo)
         db.session.commit()
         return redirect(url_for('todo.todolists'))
@@ -36,7 +36,7 @@ def todo_delete(todo_id):
     db.session.commit()
     return redirect(url_for('todo.todolists'))
 
-@bp.route('/todolists/modify/<int:todo_id>', methods=('GET', 'POST'))
+@bp.route('/todolists/modify/<int:todo_id>', methods=['GET', 'POST'])
 def todo_modify(todo_id):
     target = TodoList.query.get_or_404(todo_id)
     if request.method == 'POST':
@@ -48,6 +48,3 @@ def todo_modify(todo_id):
     else:
         form = TodoForm(obj=target)
     return render_template('todo/todo_form.html', form = form)
-
-
-
